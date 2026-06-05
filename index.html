@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CoDA 2026 — Closed-Loop Co-Design for Efficient Agentic AI | NeurIPS 2026 Workshop</title>
+  <meta name="description" content="CoDA: Closed-Loop Co-Design for Efficient Agentic AI — Systems for Agents and Agents for Systems. A NeurIPS 2026 Workshop bridging ML, systems, compilers, and hardware for efficient agentic foundation models." />
+  <meta name="keywords" content="NeurIPS 2026, workshop, agentic AI, efficient inference, ML systems, co-design, hardware, LLM serving, KV cache, agents" />
+  <meta name="author" content="CoDA Workshop Organizers" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CoDA 2026 — Closed-Loop Co-Design for Efficient Agentic AI" />
+  <meta property="og:description" content="A NeurIPS 2026 Workshop on co-designing models, systems & hardware for efficient agentic AI — and agents that optimize systems." />
+  <meta property="og:url" content="https://agentic-codesign.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔁</text></svg>" />
+</head>
+<body>
+  <!-- ===================== HEADER / NAV ===================== -->
+  <header class="site-header" id="top">
+    <nav class="nav container">
+      <a href="#top" class="brand">
+        <span class="brand-mark">CoDA</span>
+        <span class="brand-sub">NeurIPS 2026</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#cfp">Call for Papers</a></li>
+        <li><a href="#dates">Dates</a></li>
+        <li><a href="#speakers">Speakers</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#organizers">Organizers</a></li>
+        <li><a href="#committee">Committee</a></li>
+        <li><a class="nav-cta" href="#submit">Submit</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <p class="hero-eyebrow">NeurIPS 2026 Workshop</p>
+      <h1 class="hero-title">
+        Closed-Loop Co-Design for<br /><span class="grad">Efficient Agentic AI</span>
+      </h1>
+      <p class="hero-tagline">Systems for Agents &amp; Agents for Systems</p>
+      <p class="hero-lede">
+        Co-designing models, systems &amp; hardware for efficient agentic AI — and the
+        autonomous agents that optimize systems. Bringing the ML, MLSys, compiler, and
+        hardware communities into one room.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-pill"><strong>📅</strong> Dec 12–13, 2026</span>
+        <span class="meta-pill"><strong>📍</strong> Sydney · Atlanta · Paris</span>
+        <span class="meta-pill"><strong>📝</strong> Submissions on OpenReview</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#submit">Submit a Paper</a>
+        <a class="btn btn-ghost" href="#cfp">Read the Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Overview</span>
+        <h2>Rethinking the AI stack for the agentic era</h2>
+      </div>
+      <div class="prose">
+        <p>
+          AI efficiency has, until now, been optimized around a <em>stateless</em>
+          abstraction: given a prompt, a foundation model emits a sequence of tokens under
+          constraints such as latency, throughput, memory, and energy. The rapid rise of
+          <strong>agentic</strong> foundation-model workloads breaks this abstraction. Modern
+          agents maintain persistent state, reuse memory across steps, call external tools,
+          act in environments, coordinate with other agents, and execute long-horizon tasks
+          asynchronously. The efficiency bottleneck is migrating from a single inference
+          request to <strong>persistent, autonomous execution</strong> that spans models,
+          runtimes, compilers, serving systems, the memory hierarchy, and hardware.
+        </p>
+        <p>
+          The <strong>CoDA</strong> workshop convenes the machine learning, systems, compiler,
+          and hardware communities around one question: <em>how should the entire AI stack be
+          redesigned when the dominant workload is no longer a single inference request, but a
+          stateful, memory-augmented, tool-using, and potentially multi-agent trajectory?</em>
+          We frame the answer as <strong>closed-loop co-design</strong> across three coupled
+          loops, plus the emerging role of <strong>autonomous optimization agents</strong>.
+        </p>
+      </div>
+
+      <div class="loop-grid">
+        <article class="loop-card">
+          <span class="loop-num">Loop 1</span>
+          <h3>Runtime–Workload Co-Design</h3>
+          <p>
+            Agentic execution turns inference into a long-lived, bursty, stateful workload:
+            cross-turn &amp; cross-agent KV-cache reuse and eviction, paged/disaggregated
+            memory, prefix caching, async &amp; speculative tool execution, and multi-agent
+            orchestration.
+          </p>
+        </article>
+        <article class="loop-card">
+          <span class="loop-num">Loop 2</span>
+          <h3>Model–System Co-Design</h3>
+          <p>
+            Architectures &amp; training objectives that are <em>natively</em> efficient for
+            agentic execution: memory-centric &amp; sub-quadratic models, hybrid designs,
+            adaptive-compute &amp; elastic models, retrieval-aware models, and low-cost
+            distillation into efficient backbones.
+          </p>
+        </article>
+        <article class="loop-card">
+          <span class="loop-num">Loop 3</span>
+          <h3>Hardware–Infrastructure Co-Design</h3>
+          <p>
+            Persistent autonomous workloads reshape the substrate they run on:
+            hardware-aware kernels &amp; attention, accelerator and memory-hierarchy design
+            for stateful inference, disaggregated &amp; heterogeneous serving, and elastic
+            deployment from datacenter to edge.
+          </p>
+        </article>
+        <article class="loop-card accent">
+          <span class="loop-num">Cross-cutting</span>
+          <h3>Agents for Systems</h3>
+          <p>
+            Foundation-model agents that <em>close</em> these loops: profiling workloads,
+            diagnosing bottlenecks, synthesizing &amp; tuning GPU kernels, optimizing
+            compilers, and proposing runtime policies — with attention to evaluation and
+            safety of self-optimizing pipelines.
+          </p>
+        </article>
+      </div>
+
+      <div class="callout">
+        <h3>Why now?</h3>
+        <p>
+          2025–2026 marks an inflection point: agentic foundation models have moved from
+          research demos to production, and inference — not training — is now the dominant and
+          fastest-growing cost of deployed AI. These threads advance rapidly but in
+          <em>separate</em> communities. Without a venue that deliberately couples them, the
+          field risks fragmentation: locally optimal models that are globally inefficient, and
+          benchmarks that reward the wrong quantity. This is the right forum and the right
+          moment to establish shared problems, metrics, and abstractions for closed-loop
+          co-design.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CALL FOR PAPERS ===================== -->
+  <section id="cfp" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Call for Papers</span>
+        <h2>Topics of interest</h2>
+        <p class="section-intro">
+          We invite <strong>papers, demos, and benchmarks</strong> across the agenda below.
+          All accepted work is <strong>non-archival</strong>. Topics include, but are not
+          limited to:
+        </p>
+      </div>
+
+      <div class="topic-grid">
+        <article class="topic-card">
+          <h3>Runtime &amp; Serving for Agents</h3>
+          <ul>
+            <li>KV-cache reuse, sharing, eviction &amp; compression across turns and agents</li>
+            <li>Scheduling, batching &amp; admission control for long-horizon, bursty trajectories</li>
+            <li>Asynchronous / speculative tool calls and tool-result caching</li>
+            <li>Multi-agent orchestration, routing &amp; disaggregated (prefill/decode) serving</li>
+          </ul>
+        </article>
+        <article class="topic-card">
+          <h3>Efficient Models &amp; Architectures</h3>
+          <ul>
+            <li>Memory-centric, sub-quadratic &amp; hybrid architectures for long, stateful contexts</li>
+            <li>Adaptive-compute, elastic &amp; many-in-one models matching compute to difficulty</li>
+            <li>Retrieval- &amp; memory-augmented models; persistent and long-term state</li>
+            <li>Low-cost adaptation: distillation, compression, PEFT &amp; upcycling</li>
+          </ul>
+        </article>
+        <article class="topic-card">
+          <h3>Hardware &amp; Infrastructure Co-Design</h3>
+          <ul>
+            <li>Hardware-aware kernels, attention &amp; operators for stateful inference</li>
+            <li>Accelerator, memory-hierarchy &amp; interconnect design for persistent workloads</li>
+            <li>Heterogeneous, disaggregated &amp; elastic serving from datacenter to edge</li>
+          </ul>
+        </article>
+        <article class="topic-card">
+          <h3>Agents for Systems (Autonomous Optimization)</h3>
+          <ul>
+            <li>LLM agents for kernel generation, compiler tuning &amp; performance debugging</li>
+            <li>Autonomous workload profiling, bottleneck diagnosis &amp; runtime-policy synthesis</li>
+            <li>Reliability, reproducibility &amp; safety of self-optimizing systems</li>
+          </ul>
+        </article>
+        <article class="topic-card">
+          <h3>Efficient Reasoning &amp; Test-Time Compute</h3>
+          <ul>
+            <li>Adaptive "thinking budget" &amp; test-time compute allocation for long-horizon tasks</li>
+            <li>Combining test-time compute with quantization, speculative decoding &amp; caching</li>
+            <li>Efficient reasoning on heterogeneous / resource-constrained devices</li>
+          </ul>
+        </article>
+        <article class="topic-card">
+          <h3>Evaluation, Benchmarking &amp; Metrics</h3>
+          <ul>
+            <li>End-to-end, compute-aware metrics for full agent trajectories (latency, memory, energy, $/task)</li>
+            <li>Benchmarks &amp; leaderboards for agentic serving, multi-agent systems &amp; tool use</li>
+            <li>Quality–cost–reliability trade-offs under realistic deployment constraints</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== IMPORTANT DATES ===================== -->
+  <section id="dates" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Important Dates</span>
+        <h2>Key deadlines</h2>
+        <p class="section-intro">All deadlines are Anywhere on Earth (AoE).</p>
+      </div>
+      <ol class="timeline">
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-body">
+            <span class="tl-date">August 29, 2026</span>
+            <h3>Submission Deadline</h3>
+            <p>Short papers, full papers, and demos/benchmarks via OpenReview.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-body">
+            <span class="tl-date">September 22, 2026</span>
+            <h3>Acceptance Notification</h3>
+            <p>Authors notified of decisions.</p>
+          </div>
+        </li>
+        <li class="tl-item">
+          <div class="tl-marker"></div>
+          <div class="tl-body">
+            <span class="tl-date">September 29, 2026</span>
+            <h3>Mandatory Accept/Reject (NeurIPS)</h3>
+            <p>Final NeurIPS notification deadline.</p>
+          </div>
+        </li>
+        <li class="tl-item highlight">
+          <div class="tl-marker"></div>
+          <div class="tl-body">
+            <span class="tl-date">December 12 or 13, 2026</span>
+            <h3>Workshop Day</h3>
+            <p>Full-day program (date per assigned venue).</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===================== SPEAKERS ===================== -->
+  <section id="speakers" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Invited Speakers</span>
+        <h2>Confirmed speakers</h2>
+        <p class="section-intro">
+          Five confirmed speakers spanning all three co-design loops — ML systems &amp;
+          serving, efficient architectures &amp; hardware/accelerators, and agentic foundation
+          models. One additional speaker is being finalized.
+        </p>
+      </div>
+      <div class="speaker-grid">
+        <article class="speaker-card">
+          <div class="avatar">AK</div>
+          <h3>Ana Klimovic</h3>
+          <p class="affil">ETH Zurich</p>
+          <span class="status confirmed">Confirmed</span>
+        </article>
+        <article class="speaker-card">
+          <div class="avatar">MA</div>
+          <h3>Mohamed Abdelfattah</h3>
+          <p class="affil">Cornell University &amp; Makora</p>
+          <span class="status confirmed">Confirmed</span>
+        </article>
+        <article class="speaker-card">
+          <div class="avatar">BL</div>
+          <h3>Bang Liu</h3>
+          <p class="affil">University of Montreal (UdeM) &amp; MILA</p>
+          <span class="status confirmed">Confirmed</span>
+        </article>
+        <article class="speaker-card">
+          <div class="avatar">BD</div>
+          <h3>Bita Darvish Rouhani</h3>
+          <p class="affil">NVIDIA</p>
+          <span class="status confirmed">Confirmed</span>
+        </article>
+        <article class="speaker-card">
+          <div class="avatar">ZZ</div>
+          <h3>Zhenyu Zhang</h3>
+          <p class="affil">AMD</p>
+          <span class="status confirmed">Confirmed</span>
+        </article>
+        <article class="speaker-card placeholder">
+          <div class="avatar">?</div>
+          <h3>To be announced</h3>
+          <p class="affil">One additional speaker being finalized</p>
+          <span class="status pending">Coming soon</span>
+        </article>
+      </div>
+
+      <div class="debate-banner">
+        <div>
+          <span class="kicker">Interactive Panel / Debate</span>
+          <h3>"Do we need to redesign the AI stack for agents, or will modular, layered abstractions suffice?"</h3>
+          <p>
+            A 45-minute moderated debate pairing systems/hardware and modeling perspectives,
+            with structured rebuttals and live audience polling. The confirmed panel roster
+            will be posted here ahead of the conference.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SCHEDULE ===================== -->
+  <section id="schedule" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Program</span>
+        <h2>Tentative schedule</h2>
+        <p class="section-intro">
+          A full-day program that deliberately favors discussion and contributed content over
+          long-form talks — <strong>3.5+ hours of free-form discussion</strong> across poster
+          sessions and breaks, plus the moderated debate and live Q&amp;A. Final times will be
+          posted before the conference.
+        </p>
+      </div>
+      <div class="schedule">
+        <div class="sched-row"><span class="sched-tag">Opening</span><div><h3>Opening Remarks</h3><p>Welcome &amp; overview of the day.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Invited</span><div><h3>Invited Talks (×5)</h3><p>~2.25 hours total, spanning all three co-design loops.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Contributed</span><div><h3>Contributed Orals (×6)</h3><p>Six 10-minute presentations of accepted papers.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Debate</span><div><h3>Moderated Debate</h3><p>45-minute structured debate with live audience polling.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Posters</span><div><h3>Poster Sessions (×2)</h3><p>45–60 minutes each, ~25 posters per session.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Demos</span><div><h3>Demo / Benchmark Spotlight</h3><p>15-minute spotlight of live agentic &amp; serving systems.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Breakout</span><div><h3>"Open Problems" Breakout</h3><p>Crowd-sourcing the community's priority list for closed-loop co-design.</p></div></div>
+        <div class="sched-row"><span class="sched-tag">Awards</span><div><h3>Best Paper / Demo Awards &amp; Closing</h3><p>Recognizing outstanding contributions.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SUBMIT ===================== -->
+  <section id="submit" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Submissions</span>
+        <h2>How to submit</h2>
+      </div>
+      <div class="submit-grid">
+        <div class="submit-card">
+          <h3>Format</h3>
+          <p>We accept <strong>short papers</strong>, <strong>full papers</strong>, and <strong>demos / benchmarks</strong>. Submissions are handled on OpenReview, each receiving 3 reviews.</p>
+        </div>
+        <div class="submit-card">
+          <h3>Non-archival</h3>
+          <p>All accepted work is <strong>non-archival</strong> (no NeurIPS overlap). Please refrain from submitting already-finalized or previously published work.</p>
+        </div>
+        <div class="submit-card">
+          <h3>Reviewing</h3>
+          <p>We require at least one volunteer reviewer per submission to ensure coverage and timely, thoughtful reviews.</p>
+        </div>
+        <div class="submit-card">
+          <h3>Mentorship</h3>
+          <p>Three virtual mentorship sessions before the deadline help new researchers and underrepresented groups prepare high-quality submissions.</p>
+        </div>
+      </div>
+      <div class="submit-cta">
+        <a class="btn btn-primary btn-lg" href="#" aria-disabled="true">OpenReview portal — opening soon</a>
+        <p class="muted">The submission portal link will be posted here once the call opens.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ORGANIZERS ===================== -->
+  <section id="organizers" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Organizers</span>
+        <h2>Organizing committee</h2>
+        <p class="section-intro">
+          A cross-disciplinary team spanning efficient ML/NLP, ML systems, and
+          hardware/accelerators across academia and industry.
+        </p>
+      </div>
+      <div class="org-grid">
+        <article class="org-card">
+          <h3>Mehdi Rezagholizadeh</h3>
+          <p class="affil">AMD</p>
+          <p class="org-bio">Principal Member of Technical Staff at AMD; previously led the NLP team at Huawei Noah's Ark Lab Canada. Co-organizer of the NeurIPS ENLSP series (2021–2025). Lead organizer.</p>
+          <a class="org-mail" href="mailto:mehdi.rezagholizadeh@amd.com">mehdi.rezagholizadeh@amd.com</a>
+        </article>
+        <article class="org-card">
+          <h3>Vikram Appia</h3>
+          <p class="affil">AMD</p>
+          <p class="org-bio">Researcher/engineer working on efficient AI and hardware–software co-design for deep learning systems, bridging the model–system–hardware loops.</p>
+          <a class="org-mail" href="mailto:vikram.appia@amd.com">vikram.appia@amd.com</a>
+        </article>
+        <article class="org-card">
+          <h3>Niyu Ge</h3>
+          <p class="affil">Alibaba</p>
+          <p class="org-bio">Researcher with interests spanning NLP and large-scale, efficient model deployment, contributing industry perspective on serving and productionizing foundation models.</p>
+          <a class="org-mail" href="mailto:niyuge@hotmail.com">niyuge@hotmail.com</a>
+        </article>
+        <article class="org-card">
+          <h3>Mohammadmahdi Kamani</h3>
+          <p class="affil">NVIDIA</p>
+          <p class="org-bio">Researcher working on efficient and scalable machine learning, including optimization and distributed/efficient training and inference.</p>
+        </article>
+        <article class="org-card">
+          <h3>Boxing Chen</h3>
+          <p class="affil">Huawei Noah's Ark Lab</p>
+          <p class="org-bio">Chief Researcher of the Montreal Research Centre, Huawei Technologies Canada. 100+ papers; area chair for ACL, EMNLP, COLING, and AACL.</p>
+          <a class="org-mail" href="mailto:boxing.chen@huawei.com">boxing.chen@huawei.com</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== COMMITTEE ===================== -->
+  <section id="committee" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="kicker">Program Committee</span>
+        <h2>75+ confirmed members</h2>
+        <p class="section-intro">
+          Our Program Committee spans 15+ universities and 15+ companies across a broad range
+          of regions, career stages, and affiliations. A subset is listed below; the full,
+          updated list will be posted ahead of the conference.
+        </p>
+      </div>
+      <div class="pc-list" id="pcList"></div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="brand-mark">CoDA</span>
+        <p>Closed-Loop Co-Design for Efficient Agentic AI<br />A NeurIPS 2026 Workshop</p>
+      </div>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#cfp">Call for Papers</a>
+        <a href="#dates">Dates</a>
+        <a href="#speakers">Speakers</a>
+        <a href="#submit">Submit</a>
+      </div>
+      <div class="footer-meta">
+        <p>📍 Sydney · Atlanta · Paris</p>
+        <p>📅 December 12–13, 2026</p>
+        <p><a href="https://agentic-codesign.github.io/">agentic-codesign.github.io</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>© 2026 CoDA Workshop Organizers. Built for the NeurIPS 2026 community.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
