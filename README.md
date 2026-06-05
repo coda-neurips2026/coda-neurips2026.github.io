@@ -1,10 +1,10 @@
 # CoDA 2026 — Workshop Website
 
 Source for the **Closed-Loop Co-Design for Efficient Agentic AI** (CoDA) workshop website,
-a NeurIPS 2026 workshop. The site is a static, dependency-free page designed for
+a NeurIPS 2026 workshop. The site is a static, dependency-free page served by
 **GitHub Pages**.
 
-🔗 **Live site:** https://agentic-codesign.github.io/
+🔗 **Live site:** https://coda-neurips2026.github.io/
 
 ## Structure
 
@@ -15,11 +15,9 @@ a NeurIPS 2026 workshop. The site is a static, dependency-free page designed for
 │   ├── css/style.css      # Styling (dark, responsive, no build step)
 │   └── js/main.js         # Nav, scroll reveal, program committee list
 ├── .nojekyll              # Serve files as-is (skip Jekyll processing)
+├── .gitignore             # Ignores LaTeX build artifacts & editor files
 └── README.md
 ```
-
-The LaTeX proposal (`main.tex`, `refs.bib`, `*.sty`, `*.bst`) lives alongside the site as
-the source of truth for content; it is not published by GitHub Pages.
 
 ## Local preview
 
@@ -30,35 +28,28 @@ python -m http.server 8000
 # then visit http://localhost:8000
 ```
 
-## Deploying to GitHub Pages
+## Deployment
 
-This is intended to be served from the **`agentic-codesign.github.io`** repository
-(a user/organization Pages repo that serves from the repository root).
+The site is served from the **`coda-neurips2026.github.io`** repository — a user/org
+Pages repo whose name matches its owner, so GitHub serves it at the clean root URL
+`https://coda-neurips2026.github.io/`.
 
-1. Create a repository named `agentic-codesign.github.io` under the
-   `agentic-codesign` GitHub account/organization.
-2. Push the contents of this folder to the default branch:
+Publishing is automatic: every push to the `main` branch redeploys the live site within
+about a minute.
 
-   ```bash
-   git init
-   git add .
-   git commit -m "Add CoDA 2026 workshop website"
-   git branch -M main
-   git remote add origin https://github.com/agentic-codesign/agentic-codesign.github.io.git
-   git push -u origin main
-   ```
+```bash
+git add .
+git commit -m "Update workshop website"
+git push
+```
 
-3. In **Settings → Pages**, set the source to **Deploy from a branch**, branch `main`,
-   folder `/ (root)`. The site goes live at `https://agentic-codesign.github.io/`.
-
-> To serve from a **project** repo instead (e.g. `org/coda-2026`), the site will be
-> available at `https://<org>.github.io/coda-2026/`. Because all asset paths are relative,
-> no changes are needed.
+GitHub Pages settings (one-time): **Settings → Pages → Build and deployment**, source
+**Deploy from a branch**, branch `main`, folder `/ (root)`.
 
 ## Updating content
 
 - **Speakers / dates / schedule / organizers** — edit the corresponding `<section>` in
-  `index.html`.
+  `index.html`. Speaker avatars use the person's initials in the `.avatar` div.
 - **Program Committee** — edit the `members` array near the bottom of `assets/js/main.js`.
 - **Colors / typography** — adjust the CSS custom properties in the `:root` block of
   `assets/css/style.css`.
