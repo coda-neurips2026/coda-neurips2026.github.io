@@ -168,6 +168,14 @@ strong { color: #fff; font-weight: 600; }
 .debate-banner .kicker { color: var(--accent); }
 .debate-banner h3 { font-size: 1.35rem; margin: 6px 0 12px; max-width: 760px; }
 .debate-banner p { color: var(--text-dim); max-width: 760px; }
+.debate-intro { margin-bottom: 28px; }
+.panelist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.panelist-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 18px; text-align: center; transition: transform 0.2s ease, border-color 0.2s ease; }
+.panelist-card:hover { transform: translateY(-4px); border-color: var(--accent); }
+.panelist-card .avatar { width: 58px; height: 58px; font-size: 1.2rem; margin-bottom: 12px; background: linear-gradient(120deg, var(--accent), #a78bfa); }
+.panelist-card.placeholder .avatar { background: var(--surface-2); color: var(--text-mute); border: 1px dashed var(--border); }
+.panelist-card h4 { font-family: var(--font-head); font-size: 1.02rem; letter-spacing: -0.01em; }
+.panelist-card .affil { color: var(--text-dim); font-size: 0.86rem; margin: 5px 0 12px; }
 
 /* ===================== SCHEDULE ===================== */
 .schedule { display: flex; flex-direction: column; gap: 12px; }
