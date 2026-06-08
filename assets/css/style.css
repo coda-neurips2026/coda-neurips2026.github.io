@@ -160,6 +160,7 @@ strong { color: #fff; font-weight: 600; }
 .speaker-card.placeholder .avatar { background: var(--surface-2); color: var(--text-mute); border: 1px dashed var(--border); }
 .speaker-card h3 { font-size: 1.1rem; }
 .affil { color: var(--text-dim); font-size: 0.9rem; margin: 6px 0 14px; }
+.speaker-focus { color: var(--text-dim); font-size: 0.82rem; font-style: italic; margin: -8px 0 14px; line-height: 1.4; }
 .status { display: inline-block; font-size: 0.74rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.04em; }
 .status.confirmed { background: rgba(34, 197, 94, 0.14); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
 .status.pending { background: rgba(250, 204, 21, 0.12); color: #fbbf24; border: 1px solid rgba(250,204,21,0.3); }
@@ -198,7 +199,8 @@ strong { color: #fff; font-weight: 600; }
 .org-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 28px; transition: border-color 0.2s ease, transform 0.2s ease; }
 .org-card:hover { border-color: var(--brand); transform: translateY(-3px); }
 .org-card h3 { font-size: 1.14rem; }
-.org-card .affil { color: var(--brand-2); font-weight: 500; margin: 4px 0 12px; }
+.org-card .affil { color: var(--brand-2); font-weight: 500; margin: 4px 0 6px; }
+.org-role { display: inline-block; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.04em; padding: 3px 11px; margin: 0 0 12px; border-radius: 999px; background: rgba(99, 102, 241, 0.12); color: var(--brand-2); border: 1px solid rgba(99,102,241,0.3); }
 .org-bio { color: var(--text-dim); font-size: 0.94rem; margin-bottom: 14px; }
 .org-mail { font-family: var(--font-mono); font-size: 0.82rem; word-break: break-all; }
 
